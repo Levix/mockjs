@@ -1,0 +1,19 @@
+{
+  "name": "mockjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.31.1",
+    "prettier": "^2.8.8",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.1"
+  }
+}
