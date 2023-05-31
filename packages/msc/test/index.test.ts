@@ -1,6 +1,6 @@
 import { it, expect } from 'vitest';
-import { foo } from '../src';
+import mock from '../src';
 
 it('simple', () => {
-    expect(foo).toBe('foo');
+  expect(mock).toBe('foo');
 });
