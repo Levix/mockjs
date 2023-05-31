@@ -1,3 +1,21 @@
-export const foo = 'foo'
+import { getRandomString } from './string';
+import { getRandomBoolean } from './boolean';
+import { getRandomNumber } from './number';
+import { getRandomFloatNumber } from './floatNumber';
+import { getRandomDate, formatDate } from './date';
+import { getRandomTime } from './time';
+import { getIdCard } from './idCard';
+import { getPhoneNumber } from './phoneNumber';
 
-export const getFoo = () => 'foo'
+const mock = {
+  getRandomString,
+  getRandomBoolean,
+  getRandomFloatNumber,
+  getRandomNumber,
+  getRandomDate,
+  formatDate,
+  getRandomTime,
+  getIdCard,
+  getPhoneNumber,
+}
+export default mock;
