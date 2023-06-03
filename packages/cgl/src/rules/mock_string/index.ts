@@ -7,6 +7,9 @@ export interface MockStringParamsType {
     pool?: string;
 }
 
+/**
+ * Mock字符串规则
+ */
 export class MockStringRule extends RuleGenerator<string> {
     generate(params: MockStringParamsType) {
         const { minLen, maxLen, pool } = params;
@@ -14,6 +17,9 @@ export class MockStringRule extends RuleGenerator<string> {
     }
 }
 
+/**
+ * 获取Mock字符串规则实例
+ */
 export const getMockStringInstance = () => {
     return new MockStringRule();
 }

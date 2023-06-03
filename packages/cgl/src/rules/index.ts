@@ -1,5 +1,4 @@
-import { RuleGenerator } from "../core/rules";
-import { RuleManager } from "../core/rules/manager";
+import { RuleGenerator, RuleManager } from "../core/rules";
 import { TRuleKeyType, TRuleParamsType } from "../interface";
 import { getMockStringInstance } from "./mock_string";
 import { getPersonSleepInstance } from "./person_sleep";

@@ -8,16 +8,22 @@ export interface PersonSleepRuleType {
     date: string;
 }
 
+/**
+ * 睡大觉的人规则
+ */
 export class PersonSleepRule extends RuleGenerator<PersonSleepRuleType> {
     generate(): PersonSleepRuleType {
         return {
             name: persion.cName(),
             id: persion.id(),
-            date: random.getDate(),
+            date: random.getDate().toString(),
         }
     }
 }
 
+/**
+ * 获取睡大觉的人规则实例
+ */
 export const getPersonSleepInstance = () => {
     return new PersonSleepRule();
 }
