@@ -10,7 +10,7 @@ import { getWord } from './random/word';
 
 export const injectMethodsMap = {
   mock: mock,
-  randomNumber: (digit = 2) => getNumber(digit),
+  randomNumber: (digit = 1) => getNumber(digit),
   randomString: (start = 1, end = 20) => getString(start, end),
   randomWord: (start = 1, end = 10) => getWord(start, end),
   randomBoolean: () => getBoolean(),
