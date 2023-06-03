@@ -1,3 +1,16 @@
-export const foo = 'foo'
+import { initMock } from './init';
 
-export const getFoo = () => 'foo'
+function Mock () {
+  if (!(this instanceof Mock)) {
+    console.warn('应该用new执行')
+  }
+
+  this.init();
+}
+
+initMock(Mock);
+
+console.log(Mock)
+
+export default Mock;
+
