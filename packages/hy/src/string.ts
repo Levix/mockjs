@@ -8,7 +8,7 @@
   let randomString = Array(len).fill(0).reduce(data => {
     let str = data;
     str += strings.charAt(Math.floor(Math.random() * maxValue));
-    return str
+    return str;
   }, '');
 
   return randomString

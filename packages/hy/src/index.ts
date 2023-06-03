@@ -7,7 +7,7 @@ import { getRandomTime } from './time';
 import { getIdCard } from './idCard';
 import { getPhoneNumber } from './phoneNumber';
 
-const mock = {
+export {
   getRandomString,
   getRandomBoolean,
   getRandomFloatNumber,
@@ -17,5 +17,4 @@ const mock = {
   getRandomTime,
   getIdCard,
   getPhoneNumber,
-}
-export default mock;
+};

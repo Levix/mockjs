@@ -13,5 +13,9 @@
         "noEmit": true,
         "outDir": "dist",
         "resolveJsonModule": true
+    },
+    "typedocOptions": {
+        "entryPoints": ["packages/hy/src/index.ts"],
+        "out": "docs"
     }
 }

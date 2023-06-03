@@ -97,5 +97,5 @@ export function joinFormatStr(date: Date, arr: string[], joinStr: string): strin
   return arr.reduce((result, current, index) => {
     result += formatObject[current](date) + (index === arr.length - 1 ? '' : joinStr);
     return result;
-  }, '')
+  }, '');
 }
