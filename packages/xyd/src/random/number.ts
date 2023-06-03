@@ -1,3 +1,3 @@
-export function getNumber() {
+export function getNumber(digit: number) {
   return 0;
 }
