@@ -1,10 +1,12 @@
 import { addZero } from "../utils/tool";
+import log from '../utils/log';
+
 /**
  * 获取随机日期对象
  * @param min 最小日期值
  * @param max 最大日期值
  */
-export function getRandomDate(min?: Date, max?: Date): Date {
+const getRandomDate = (min?: Date, max?: Date): Date => {
   min = min ?? new Date(0);
   max = max ?? new Date();
   return new Date(Math.floor(Math.random() * (max.getTime() - min.getTime())) + min.getTime());
@@ -62,26 +64,30 @@ const formatObject: Record<string, any> = {
  * @param date 日期
  * @param format 日期格式
  */
-export function formatDate(date: Date, format: string = 'YYYY-MM-DD HH:mm:ss'): string | void {
+const formatDate = (date: Date, format: string = 'YYYY-MM-DD HH:mm:ss'): string | void => {
   var arr = format.split(' ');
   if(arr.length > 2) {
-    throw new Error("不支持此格式");
+    log.error('不支持此格式');
+    return;
   }
   var pre = arr[0].split('-');
   if(pre.length > 3) {
-    throw new Error("不支持此格式");
+    log.error('不支持此格式');
+    return;
   }
   var later: string[] = [];
   if(arr.length === 2) {
     later = arr[1].split(':');
     if(later.length > 3) {
-      throw new Error("不支持此格式");
+      log.error('不支持此格式');
+      return;
     }
   }
 
   const formatArr = pre.concat(later);
   if(!formatArr.every(item => formatObject[item])) {
-    throw new Error("不支持此格式");
+    log.error('不支持此格式');
+    return;
   }
   return joinFormatStr(date, pre, '-') + (later.length ? ' ' : '') + joinFormatStr(date, later, ':');
 }
@@ -93,9 +99,14 @@ export function formatDate(date: Date, format: string = 'YYYY-MM-DD HH:mm:ss'): 
  * @param joinStr 连接符
  * @returns 
  */
-export function joinFormatStr(date: Date, arr: string[], joinStr: string): string {
+const joinFormatStr = (date: Date, arr: string[], joinStr: string): string => {
   return arr.reduce((result, current, index) => {
     result += formatObject[current](date) + (index === arr.length - 1 ? '' : joinStr);
     return result;
   }, '');
+}
+
+export {
+  getRandomDate,
+  formatDate,
 }
