@@ -11,11 +11,11 @@ import { getWord } from './random/word';
 export const injectMethodsMap = {
   mock: mock,
   randomNumber: (digit = 1) => getNumber(digit),
-  randomString: (start = 1, end = 20) => getString(start, end),
+  randomString: (...args) => getString(...args),
   randomWord: (start = 1, end = 10) => getWord(start, end),
   randomBoolean: () => getBoolean(),
-  randomDate: (format = 'yyyy-mm-dd') => getDate(format),
-  randomTime: () => getTime(),
+  randomDate: (...args) => getDate(...args),
+  randomTime: (showSecend = false) => getTime(showSecend),
   randomPhone: () => getPhone(),
   randomUuid: () => getUuid()
 }
