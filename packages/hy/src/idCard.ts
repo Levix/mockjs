@@ -5,7 +5,7 @@ import { getRandomNumber } from "./number";
  * 规则 为 /(^\d{18}$)|(^\d{17}(X|x)$)/
  * @returns 随机身份证号
  */
-export function getIdCard() {
+const getIdCard = () => {
   const { len, lastStr } = getLastStr();
   let preStr = Array(len).fill(0).reduce((result, current, index) => {
     result += getRandomNumber(0, 9);
@@ -18,7 +18,7 @@ export function getIdCard() {
  * 
  * @returns len: 表示前面随机数字长度  lastStr: 表示最后一位的字符
  */
-function getLastStr() {
+const getLastStr = () => {
   const lastArr = ['', 'X', 'x'];
   const randomIndex = getRandomNumber(0, 2) as number;
   const len = randomIndex === 0 ? 18 : 17;
@@ -27,4 +27,9 @@ function getLastStr() {
     len,
     lastStr,
   }
+}
+
+export {
+  getIdCard,
+  getLastStr,
 }
