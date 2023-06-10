@@ -12,7 +12,10 @@ const getPrefix = () => {
  */
 export const getPhone = (size = 11) => {
     const prefix = getPrefix();
-    const len = size - prefix.length;
+    if (size <= prefix.length) {
+        return getString(size, size, '1234567890');
+    }
 
-    return getString(len, len, '1234567890');
+    const len = Math.min(size - prefix.length);
+    return prefix + getString(len, len, '1234567890');
 }

@@ -1,15 +1,15 @@
 import Random from "./extends/random";
 import Person from "./extends/person";
-import getShcema from "./schema";
-import { getRuleInstance } from "./rules";
-
-const Rule = getRuleInstance();
+import { Rule } from "./rules";
+import { schema } from "./schema";
+import { list } from "./list";
 
 const Mock = {
     Rule,
     Random,
     Person,
-    Schema: getShcema(Rule),
+    schema,
+    list,
 };
 
 export default Mock;

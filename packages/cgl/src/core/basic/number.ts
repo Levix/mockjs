@@ -1,4 +1,4 @@
-const MAX_INT = Number.MAX_VALUE;
+const MAX_INT = 65535;
 
 const getInteger = (min = -MAX_INT, max = MAX_INT) => {
     return Math.round(Math.random() * (max - min)) + min;

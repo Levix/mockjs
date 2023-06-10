@@ -21,6 +21,10 @@
 - [Person](extends/person.md)
 - [Random（就是core中的Basic）](basic.md)
 
+## List
+> 生成列表，基于规则或特定回调生成特定范围的列表
++ [List](list.md)
+
 ## Schema
 > 模板处理，基于规则的模板处理方法，往往用于mock复杂对象或列表
 + [Schema](schema.md)
