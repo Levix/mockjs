@@ -10,7 +10,7 @@ function Mock () {
 
 initMock(Mock);
 
-console.log(Mock.randomDate())
+console.log(Mock.mock())
 
 export default Mock;
 
