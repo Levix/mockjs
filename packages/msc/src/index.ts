@@ -1,3 +1,4 @@
-export const foo = 'foo'
+import Mock from './mock';
 
-export const getFoo = () => 'foo'
+const mock = new Mock();
+export default mock;
