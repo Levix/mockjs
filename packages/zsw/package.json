@@ -1,12 +1,17 @@
 {
-  "name": "@zsw/mockjs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "@zsw/mockjs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "rm -rf dist && tsup --config tsup.config.js",
+        "test": "vitest",
+        "docs": "rm -rf docs/typedoc && npx typedoc src/index.ts --out docs/typedoc"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "typedoc": "^0.24.7"
+    }
 }
