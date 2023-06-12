@@ -7,12 +7,12 @@ import log from '../utils/log';
  * @param max 最大值  
  */
 const getRandomNumber = (min: number, max: number): number | void => {
-  if(!isInteger(min.toString())){
+  if(!isInteger(min)){
     log.error('参数只能是整数');
     return;
   };
 
-  if(!isInteger(max.toString())){
+  if(!isInteger(max)){
     log.error('参数只能是整数');
     return;
   }

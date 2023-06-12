@@ -65,31 +65,49 @@ const formatObject: Record<string, any> = {
  * @param format 日期格式
  */
 const formatDate = (date: Date, format: string = 'YYYY-MM-DD HH:mm:ss'): string | void => {
+  if(!validateFormat(format)) {
+    return;
+  }
+
+  const arr = format.split(' ');
+  const pre = arr[0].split('-');
+  const later: string[] = arr.length === 2 ? arr[1].split(':') : [];
+  
+  return joinFormatStr(date, pre, '-') + (later.length ? ' ' : '') + joinFormatStr(date, later, ':');
+}
+
+/**
+ * 
+ * @param format 格式
+ * @returns format参数是否合法
+ */
+const validateFormat = (format: string): boolean => {
   var arr = format.split(' ');
   if(arr.length > 2) {
-    log.error('不支持此格式');
-    return;
+    log.error(`不支持此格式: ${format}`);
+    return false;
   }
   var pre = arr[0].split('-');
   if(pre.length > 3) {
-    log.error('不支持此格式');
-    return;
+    log.error(`不支持此格式: ${format}`);
+    return false;
   }
   var later: string[] = [];
   if(arr.length === 2) {
     later = arr[1].split(':');
     if(later.length > 3) {
-      log.error('不支持此格式');
-      return;
+      log.error(`不支持此格式: ${format}`);
+      return false;
     }
   }
 
   const formatArr = pre.concat(later);
   if(!formatArr.every(item => formatObject[item])) {
-    log.error('不支持此格式');
-    return;
+    log.error(`不支持此格式: ${format}`);
+    return false;
   }
-  return joinFormatStr(date, pre, '-') + (later.length ? ' ' : '') + joinFormatStr(date, later, ':');
+
+  return true;
 }
 
 /**
