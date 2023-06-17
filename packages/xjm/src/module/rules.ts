@@ -1,5 +1,7 @@
+/**
+ * 特定规则 mock数据
+ */
 import { number } from './number';
-import { date } from './date';
 
 /**
  * 生成手机号码
@@ -14,37 +16,62 @@ const phone = () => {
   ];
   const prefix = startList[Math.floor(Math.random() * startList.length)];
   let suffix = '';
-  for (var i = 0; i < 8; i++) {
+  for (let i = 0; i < 8; i++) {
     suffix += Math.floor(Math.random() * 10);
   }
   return `${prefix}${suffix}`;
 };
 
+// 根据前17位生成末位
+function cnNewID(id: string) {
+    const arrExp = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]; // 加权因子
+    const arrValid = [1, 0, "X", 9, 8, 7, 6, 5, 4, 3, 2]; // 校验码
+    let sum = 0;
+    for (let j = 0; j < 17; j++) {
+      // 对前17位数字与权值乘积求和
+      sum += parseInt(id[j], 10) * arrExp[j];
+    }
+    return arrValid[sum % 11];
+}
+
 /**
- * 生成身份证号码
+ * 生成中国身份证号码
  * @returns 
  */
-const id = () => {
-  const areaCode = number(110000, 659004);
-  var birthDate = date();
-  const year = birthDate.getFullYear().toString().slice(-2);
-  const month = (birthDate.getMonth() + 1).toString().padStart(2, '0');
-  const day = birthDate.getDate().toString().padStart(2, '0');
-  const sequenceCode = number(0, 999).toString().padStart(3, '0');
-  const id17 = areaCode + year + month + day + sequenceCode;
-  const weightedFactors = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-  const checksums = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
-  let sum = 0;
-  for (let i = 0; i < id17.length; i++) {
-    sum += parseInt(id17.charAt(i)) * weightedFactors[i];
-  }
-  const checksumIndex = sum % 11;
-  const checksum = checksums[checksumIndex];
-  const idNumber = areaCode + year + month + day + sequenceCode + checksum;
-  return idNumber;
-};
+function id() {
+    let idNo = '';
+    for(let i = 0; i < 18; i++) {
+        if(i < 6) {
+            idNo += number.range(0, 10)
+        }else if(i === 6) {
+            idNo += number.range(1, 2) //年份第一位仅支持1和2
+        }else if(i === 7) { 
+            idNo += idNo[6] == '1' ? 9 : 0;//两位年份规则，仅支持19和20
+        }else if(i === 8) {
+            idNo += idNo[6] == '1' ? number.range(3, 7) : number.range(0, 2); //三位年份规则，仅支持193-199、200、201这些值
+        }else if(i === 9) {
+            idNo += number.range(0, 10) //四位年份规则,0-9
+        }else if(i === 10) {
+            idNo += number.range(0, 2);//首位月份规则
+        }else if(i === 11) {
+            idNo += idNo[10] == '0' ? number.range(1, 9) : number.range(0, 3);//末位月份规则
+        }else if(i === 12) {
+            const maxDays = new Date(Number(idNo.slice(6, 10)), Number(idNo.slice(10, 2)), 0).getDate(); // 获取当月最大天数
+            const day = number.range(1, maxDays)
+            if (day) {
+              idNo += day < 10 ? ('0' + day) : day;
+              i++
+            }
+        }else if(i > 13 && i < 17) {
+            idNo += number.range(0, 10)
+        }else if(i === 17) {
+            idNo += cnNewID(idNo);
+        }
+    }
+    return idNo;
+}
 
-export {
+export const rules = {
   phone,
   id,
 };
