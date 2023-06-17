@@ -6,6 +6,7 @@
     "scripts": {
         "build": "rm -rf dist && tsup --config tsup.config.js",
         "test": "vitest",
+        "coverage": "vitest run --coverage",
         "docs": "rm -rf docs/typedoc && npx typedoc src/index.ts --out docs/typedoc"
     },
     "keywords": [],

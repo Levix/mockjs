@@ -1,16 +1,17 @@
-import { randomBoolean, randomInt, randomChar, randomFloat, randomString } from './random/basic';
-import { randomArr, randomObj } from './temp/complex';
+import { randomBool, randomInt, randomChar, randomFloat, randomStr } from './random/base';
+import { MockR } from './rule/index';
+import { temp } from './temp';
 
 export class MockX {
     static random = {
-        bool: randomBoolean,
+        bool: randomBool,
         int: randomInt,
         char: randomChar,
         float: randomFloat,
-        str: randomString,
-        arr: randomArr,
-        obj: randomObj,
+        str: randomStr,
     };
-}
 
-export { MockR } from './rules/index';
+    static temp = temp;
+
+    static rule = new MockR();
+}
