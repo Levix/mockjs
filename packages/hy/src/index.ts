@@ -1,14 +1,14 @@
-import { getTypeString, getRandomString } from './string';
-import { getRandomBoolean } from './boolean';
-import { getRandomNumber } from './number';
-import { getRandomFloatNumber } from './floatNumber';
-import { getRandomDate, formatDate } from './date';
-import { getRandomTime } from './time';
-import { getIdCard } from './idCard';
-import { getPhoneNumber } from './phoneNumber';
-import { getRandomJson } from './json';
-import { batchRandomData } from './batchData';
-import log from '../utils/log';
+import { getTypeString, getRandomString } from './basic/string';
+import { getRandomBoolean } from './basic/boolean';
+import { getRandomNumber } from './basic/number';
+import { getRandomFloatNumber } from './basic/floatNumber';
+import { getRandomDate, formatDate } from './basic/date';
+import { getRandomTime } from './basic/time';
+import { getIdCard } from './basic/idCard';
+import { getPhoneNumber } from './basic/phoneNumber';
+import { getRandomJson } from './basic/json';
+import { batchRandomData } from './extend/batchData';
+import log from './utils/log';
 
 
 let typeMap = new Map();

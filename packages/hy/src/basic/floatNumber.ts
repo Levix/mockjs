@@ -14,14 +14,11 @@ import { getString } from '../utils/common';
   if(!integerPart) {
     return;
   }
-  if(!isPositiveIntegerOrZero(partMin)) {
+  if(!isPositiveIntegerOrZero(partMin) || !isPositiveIntegerOrZero(partMax)) {
     log.error('参数只能是正整数或0');
     return;
   }
-  if(!isPositiveIntegerOrZero(partMax)) {
-    log.error('参数只能是正整数或0');
-    return;
-  }
+  
   if(partMax < partMin) { 
     log.error('参数范围值错误');
     return;

@@ -5,13 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "coverage": "vitest run --coverage",
-    "typedoc": "typedoc --out packages/hy/docs packages/hy/src/index.ts"
+    "coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "typedoc": "^0.24.8"
-  }
+  "license": "ISC"
 }

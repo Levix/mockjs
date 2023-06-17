@@ -1,4 +1,4 @@
-import { random } from './index';
+import { random } from '../index';
 import log from '../utils/log';
 
 /**
