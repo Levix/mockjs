@@ -1,8 +1,8 @@
-import { randomInt, randomString } from '../basic';
+import { randomInt, randomStr } from '../base';
 
 export const phoneRule = (size = 11) => {
     const prefixTemp = ['177', '138', '158'];
-    const prefix = [randomInt(1, prefixTemp.length)];
+    const prefix = prefixTemp[randomInt(1, prefixTemp.length - 1)];
     const len = size - prefix.length;
-    return randomString('@number', len);
+    return prefix + randomStr('@number', len);
 };
