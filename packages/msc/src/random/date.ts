@@ -117,7 +117,7 @@ export const timestamp = function (): number {
 }
 
 // 返回当前的日期和时间字符串。
-export const now = function (unit: string, format: string): string {
+export const now = function (unit?: string, format?: string): string {
   // now(unit) now(format)
   if (arguments.length === 1) {
     // now(format)

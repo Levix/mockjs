@@ -1,4 +1,4 @@
-import { pick } from './helper'
+import { pick } from '../helper'
 import { character, string } from './basic'
 import { date } from './date'
 import CHINESE from './address_dict'
