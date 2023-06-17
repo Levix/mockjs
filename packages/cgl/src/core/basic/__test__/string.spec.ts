@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getChar, getWord } from "../string";
+import { getChar, getText, getWord } from "../string";
 
 describe('getChar', () => {
     it('测试生成随机字符', () => {
@@ -41,4 +41,12 @@ describe('getWord', () => {
             expect(pool.includes(char)).toBe(true);
         }
     });
+});
+
+it('测试获取随机文案', () => {
+    const text = getText(2, 5);
+    const wordLen = text.split(' ').length;
+
+    expect(wordLen).toBeGreaterThanOrEqual(2);
+    expect(wordLen).toBeLessThanOrEqual(5);
 });

@@ -1,5 +1,8 @@
 # mockjs
 
+## 预览
+[点击](../playground/dist/index.html)
+
 ## Core
 
 ### Basic

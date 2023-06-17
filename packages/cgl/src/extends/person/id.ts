@@ -8,7 +8,7 @@ const NumPool = '1234567890'
  */
 export const getId = (size = 11) => {
     if (size < 1) {
-        log.alert('size smaller than 1');
+        log.alert('指定id长度小于1');
         return '';
     }
 

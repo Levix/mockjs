@@ -1,9 +1,25 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import person from "../person";
+import { log } from "../../helper/logger";
+
+vi.mock('../../helper/logger', () => {
+  return {
+    log: {
+        alert: vi.fn(),
+        info: vi.fn(),
+        warn: vi.fn(),
+    },
+  };
+});
 
 describe('Person ID', () => {
     it('测试生成Person ID', () => {
         expect(person.id()).toBeTypeOf('string');
+    });
+    
+    it('测试生成错误长度', () => {
+        person.id(0);
+        expect(log.alert).toHaveBeenCalledWith('指定id长度小于1')
     });
 
     it('测试生成指定长度的Person ID', () => {
