@@ -1,5 +1,6 @@
 import { log } from "../../helper/logger";
 import { IRuleGenerator, TRuleKeyType } from "../interface"
+import { RuleGenerator } from "./generator";
 
 // 规则管理器
 export class RuleManager {
@@ -24,6 +25,10 @@ export class RuleManager {
     // 添加规则
     public registerRule<T>(key: string, rule: IRuleGenerator<T>) {
         const existsRule = this.ruleMap.get(key);
+        if (!(rule instanceof RuleGenerator)) {
+            log.alert('添加实例类型错误');
+            return
+        }
 
         if (existsRule) {
             log.alert('【registerRule】', `注册规则${key}失败`, `已存在规则${key}`);
@@ -41,5 +46,6 @@ export class RuleManager {
         }
 
         this.ruleMap.delete(key);
+        log.info(`规则${key}已移除`)
     }
 }

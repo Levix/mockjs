@@ -2,12 +2,12 @@ import { getChar, getWord } from '../../core/basic';
 
 // 获取姓
 export const getFirstName = () => {
-    return getChar().toUpperCase() + getWord(1, 5);
+    return getChar('ABCDEFGHIJKLMOPQRSTUVWXYZ') + getWord(1, 4);
 }
 
 // 获取名
 export const getLastName = () => {
-    return getChar().toUpperCase() + getWord(1, 5);
+    return getChar('ABCDEFGHIJKLMOPQRSTUVWXYZ') + getWord(1, 4);
 }
 
 // 获取姓名

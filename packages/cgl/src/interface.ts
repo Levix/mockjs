@@ -10,3 +10,5 @@ export type TRuleKeyType = string;
 
 // 规则参数类型
 export type TRuleParamsType = any;
+
+export type SchemaItemType = [TRuleKeyType, TRuleParamsType, [number?, number?]?];

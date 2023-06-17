@@ -1,5 +1,8 @@
 # mockjs
 
+## 预览
+[点击](../playground/dist/index.html)
+
 ## Core
 
 ### Basic
@@ -20,6 +23,10 @@
 > 复杂数据类型，基于基础随机函数和其他复杂随机函数，往往是某种业务实体
 - [Person](extends/person.md)
 - [Random（就是core中的Basic）](basic.md)
+
+## List
+> 生成列表，基于规则或特定回调生成特定范围的列表
++ [List](list.md)
 
 ## Schema
 > 模板处理，基于规则的模板处理方法，往往用于mock复杂对象或列表

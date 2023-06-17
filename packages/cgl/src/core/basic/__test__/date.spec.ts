@@ -1,5 +1,16 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { getDate } from "../date";
+import { log } from "../../../helper/logger";
+
+vi.mock('../../../helper/logger', () => {
+  return {
+    log: {
+      alert: vi.fn(),
+      info: vi.fn(),
+      warn: vi.fn(),
+    },
+  };
+});
 
 describe('getDate', () => {
     it('获取随机日期对象', () => {
@@ -19,5 +30,11 @@ describe('getDate', () => {
 
         expect(randomTimestamp).toBeGreaterThanOrEqual(startTimestamp);
         expect(randomTimestamp).toBeLessThanOrEqual(endTimestamp);
+    });
+
+    it('测试传递错误时间参数', () => {
+        getDate('', '');
+
+        expect(log.alert).toHaveBeenCalledWith('解析时间失败');
     });
 });

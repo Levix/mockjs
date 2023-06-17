@@ -6,3 +6,6 @@ export interface IRuleGenerator<T> {
 
 // 规则Key类型
 export type TRuleKeyType = string;
+
+// 规则参数类型
+export type TRuleParamsType = any;

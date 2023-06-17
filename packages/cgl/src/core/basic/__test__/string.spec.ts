@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getChar, getWord } from "../string";
+import { getChar, getText, getWord } from "../string";
 
 describe('getChar', () => {
     it('测试生成随机字符', () => {
         const char = getChar();
-        expect(typeof char).toBe('string');
+        expect(char).toBeTypeOf('string');
         expect(char.length).toBe(1);
         expect(char.charCodeAt(0)).toBeGreaterThanOrEqual(32);
         expect(char.charCodeAt(0)).toBeLessThanOrEqual(65535);
@@ -24,7 +24,7 @@ describe('getWord', () => {
         const minLen = 3;
         const maxLen = 10;
         const word = getWord(minLen, maxLen);
-        expect(typeof word).toBe('string');
+        expect(word).toBeTypeOf('string');
         expect(word.length).toBeGreaterThanOrEqual(minLen);
         expect(word.length).toBeLessThanOrEqual(maxLen);
     });
@@ -41,4 +41,12 @@ describe('getWord', () => {
             expect(pool.includes(char)).toBe(true);
         }
     });
+});
+
+it('测试获取随机文案', () => {
+    const text = getText(2, 5);
+    const wordLen = text.split(' ').length;
+
+    expect(wordLen).toBeGreaterThanOrEqual(2);
+    expect(wordLen).toBeLessThanOrEqual(5);
 });

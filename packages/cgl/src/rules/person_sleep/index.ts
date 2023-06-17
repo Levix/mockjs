@@ -1,5 +1,5 @@
 import { RuleGenerator } from "../../core/rules";
-import persion from "../../extends/person";
+import person from "../../extends/person";
 import random from "../../extends/random";
 
 export interface PersonSleepRuleType {
@@ -14,8 +14,8 @@ export interface PersonSleepRuleType {
 export class PersonSleepRule extends RuleGenerator<PersonSleepRuleType> {
     generate(): PersonSleepRuleType {
         return {
-            name: persion.cName(),
-            id: persion.id(),
+            name: person.cName(),
+            id: person.id(),
             date: random.getDate().toString(),
         }
     }

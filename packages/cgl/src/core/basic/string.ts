@@ -4,7 +4,7 @@ import { getRandomInRange, getRandomIndex } from './common';
 // 获取随机字符，不指定字符集合，则随机生成
 export const getChar = (pool?: string) => {
     if (!pool) {
-        const index = getRandomIndex(65535 - 32) + 32;
+        const index = getRandomInRange(32, 65535);
         return String.fromCharCode(index);
     }
 
@@ -17,6 +17,7 @@ const DEFALT_WORD_POOL = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 export const getWord = (minLen = 1, maxLen = 7, pool = DEFALT_WORD_POOL): string => {
     if (minLen < 1) {
         log.warn('【getWord】', '字符最小长度重新取值为1', '字符长度小于1');
+        return '';
     }
 
     // 字符长度不小于1
