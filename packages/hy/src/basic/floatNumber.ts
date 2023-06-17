@@ -11,14 +11,14 @@ import { getString } from '../utils/common';
  */
  const getRandomFloatNumber = (min: number, max: number, partMin: number, partMax: number): string | void => {
   const integerPart = getRandomNumber(min, max);
-  if(!isPositiveIntegerOrZero(partMin.toString())) {
+  if(!integerPart) {
+    return;
+  }
+  if(!isPositiveIntegerOrZero(partMin) || !isPositiveIntegerOrZero(partMax)) {
     log.error('参数只能是正整数或0');
     return;
   }
-  if(!isPositiveIntegerOrZero(partMax.toString())) {
-    log.error('参数只能是正整数或0');
-    return;
-  }
+  
   if(partMax < partMin) { 
     log.error('参数范围值错误');
     return;

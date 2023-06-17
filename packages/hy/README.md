@@ -175,7 +175,7 @@ const template = [
     ]  
   }
 ]
-const data = random.getRandomJson(template,);
+const data = random.getRandomJson(template);
 // return [ { a: [ '01' ] }, 4 ], etc
 ```
 
@@ -197,7 +197,7 @@ len：数据条数
 type: 生成数据类型，目前只支持string，number，boolean，float，date，time，json
 
 ```
-const arr = random.batchRandomData(10，'string')('12345', 1);
+const arr = random.batchRandomData(10, 'string')('12345', 1);
 // return ['1', '3', '1', '2', '6', '3', '2', '4', '5', '2', '1'], etc
 const arr = random.batchRandomData(2, 'number')(1, 10);
 // return [2, 5], etc

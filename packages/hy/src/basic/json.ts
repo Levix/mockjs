@@ -1,5 +1,5 @@
-import { JsonTemplate } from './interface';
-import { random } from './index';
+import { JsonTemplate } from '../extend/interface';
+import { random } from '../index';
 
 /**
  * 

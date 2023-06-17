@@ -1,4 +1,4 @@
-import { random } from './index';
+import { random } from '../index';
 import log from '../utils/log';
 
 /**
@@ -9,11 +9,11 @@ import log from '../utils/log';
  */
 const batchRandomData = (len: number, type: string): any => {
   if(!random.typeMap.has(type)) {
-    log.error('不支持此类型');
+    log.error(`不支持此类型: ${type}`);
     return;
   }
 
-  return (args: any) => {
+  return (...args: any) => {
     return Array(len).fill(0).reduce(result => {
       result.push(random.typeMap.get(type)(...args));
       return result;

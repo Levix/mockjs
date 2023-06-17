@@ -1,22 +1,22 @@
 /**
  * 判断是否是正整数，负整数，0 的正则
  */
-const isInteger = (value: string): boolean => {
-  return /^-?[1-9]\d*|0$/.test(value);
+const isInteger = (value: number): boolean => {
+  return (value | 0) === value;
 }
 
 /**
  * 判断是否是正整数
  */
-const isPositiveInteger = (value: string): boolean =>{
-  return /^[1-9]\d*$/.test(value);
+const isPositiveInteger = (value: number): boolean =>{
+  return isInteger(value) && value > 0;
 }
 
 /**
  * 判断是否是正整数或0
  */
-const isPositiveIntegerOrZero = (value: string): boolean =>{
-  return /^[1-9]\d*|0$/.test(value);
+const isPositiveIntegerOrZero = (value: number): boolean =>{
+  return isInteger(value) && value >= 0;
 }
 
 /**
