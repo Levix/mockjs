@@ -7,6 +7,7 @@ const mock = new Mock();
 ```
 
 ### mock.string.zh(unit)
+- unit: number 指定返回的字符串长度
 
 返回指定长度unit的中文字符串
 
@@ -15,18 +16,24 @@ const str = mock.string.zh(5);
 // str '偒抴近蘷贷'
 ```
 
-### mock.string.en(unit)
+### mock.string.en(unit, pool)
+- unit: number 指定返回的字符串长度
+- pool?: string 从当前字符集中返回字符串
 
-返回指定长度unit的英文字符串
+返回当前字符集（不传则使用默认字符集）指定长度unit的英文字符串
 
 ```
 const str = mock.string.en(5);
 // str 'abcde'
 ```
 
-### mock.string.num(unit)
+### mock.string.num(unit, pool)
 
 返回指定长度unit的数字字符串
+- unit: number 指定返回的字符串长度
+- pool?: string 从当前字符集中返回字符串
+
+返回当前字符集（不传则使用默认字符集）指定长度unit的英文字符串
 
 ```
 const str = mock.string.num(5)
@@ -34,6 +41,7 @@ const str = mock.string.num(5)
 ```
 
 ### mock.string.zh_en(unit)
+- unit: number 指定返回的字符串长度
 
 返回指定长度unit的中英文字符串
 
@@ -43,6 +51,7 @@ const str = mock.string.zh_en(5)
 ```
 
 ### mock.string en_num(unit)
+- unit: number 指定返回的字符串长度
 
 返回指定长度unit的英文数字字符串
 
@@ -62,6 +71,8 @@ const bool = mock.boolean()
 ```
 
 ### mock.number.range(min, max)
+- min: number 生成数字的最小值
+- max: number 生成数字的最大值
 
 返回[min, max]范围内的随机数字
 
@@ -71,6 +82,8 @@ const num = mock.number.range(0, 10)
 ```
 
 ### mock.number.natural(min, max)
+- min: number 生成数字的最小值
+- max: number 生成数字的最大值
 
 返回[min, max]范围内的自然数
 
@@ -80,6 +93,8 @@ const num = mock.number.natural(5, 10)
 ```
 
 ### mock.number.positive(min, max)
+- min: number 生成数字的最小值
+- max: number 生成数字的最大值
 
 返回[min, max]范围内的正数
 
@@ -90,6 +105,8 @@ const num = mock.number.positive(1, 10)
 ```
 
 ### mock.number.negative(min, max)
+- min: number 生成数字的最小值
+- max: number 生成数字的最大值
 
 返回[min, max]范围内的负数
 
@@ -99,6 +116,9 @@ const num = mock.number.negative(-1, -10)
 ```
 
 ### mock.number.float(min, max, decimal)
+- min: number 生成数字的最小值
+- max: number 生成数字的最大值
+- decimal: number 生成浮点数的位数
 
 返回[min, max]范围内，小数位数为decimal的浮点数
 
@@ -144,6 +164,7 @@ const obj = mock.object.random(2)
 ```
 
 ### mock.object.array2Object(arr)
+- arr: Array<{ key: string, value: () => any }> 转发未对象的目标数组，数组的每一项是由key(string类型)和value(function类型)组成
 
 根据传入的数组返回对象
 
@@ -163,6 +184,7 @@ const obj = mock.object.array2Object(arr)
 ```
 
 ### mock.array.number(length)
+- length: number 生成数组的长度
 
 生成length长度的数组，数组每一项都是number
 
@@ -172,6 +194,7 @@ arr // [1]
 ```
 
 ### mock.array.string(length)
+- length: number 生成数组的长度
 
 生成length长度的数组，数组每一项都是string
 
@@ -181,6 +204,7 @@ arr // ['a']
 ```
 
 ### mock.array.boolean(length)
+- length: number 生成数组的长度
 
 生成length长度的数组，数组的每一项都是boolean
 
@@ -218,8 +242,9 @@ const data = mock.template.json(jsonData)
 ```
 
 ### mock.large(num)
+- num: number 生成数组的长度
 
-生成长度为length的数组
+生成长度为num的数组
 
 ```
 const arr = mock.large(100);

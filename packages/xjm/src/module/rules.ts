@@ -2,10 +2,11 @@
  * 特定规则 mock数据
  */
 import { number } from './number';
+import { string } from './string';
 
 /**
  * 生成手机号码
- * @returns 
+ * @returns
  */
 const phone = () => {
   const startList = [
@@ -23,7 +24,7 @@ const phone = () => {
 };
 
 // 根据前17位生成末位
-function cnNewID(id: string) {
+const cnNewID = (id: string) => {
     const arrExp = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]; // 加权因子
     const arrValid = [1, 0, "X", 9, 8, 7, 6, 5, 4, 3, 2]; // 校验码
     let sum = 0;
@@ -36,39 +37,35 @@ function cnNewID(id: string) {
 
 /**
  * 生成中国身份证号码
- * @returns 
+ * @returns
  */
-function id() {
-    let idNo = '';
-    for(let i = 0; i < 18; i++) {
-        if(i < 6) {
-            idNo += number.range(0, 10)
-        }else if(i === 6) {
-            idNo += number.range(1, 2) //年份第一位仅支持1和2
-        }else if(i === 7) { 
-            idNo += idNo[6] == '1' ? 9 : 0;//两位年份规则，仅支持19和20
-        }else if(i === 8) {
-            idNo += idNo[6] == '1' ? number.range(3, 7) : number.range(0, 2); //三位年份规则，仅支持193-199、200、201这些值
-        }else if(i === 9) {
-            idNo += number.range(0, 10) //四位年份规则,0-9
-        }else if(i === 10) {
-            idNo += number.range(0, 2);//首位月份规则
-        }else if(i === 11) {
-            idNo += idNo[10] == '0' ? number.range(1, 9) : number.range(0, 3);//末位月份规则
-        }else if(i === 12) {
-            const maxDays = new Date(Number(idNo.slice(6, 10)), Number(idNo.slice(10, 2)), 0).getDate(); // 获取当月最大天数
-            const day = number.range(1, maxDays)
-            if (day) {
-              idNo += day < 10 ? ('0' + day) : day;
-              i++
-            }
-        }else if(i > 13 && i < 17) {
-            idNo += number.range(0, 10)
-        }else if(i === 17) {
-            idNo += cnNewID(idNo);
-        }
-    }
-    return idNo;
+const id = () => {
+    // 前六位随机数
+    const firstRandomStr = string.num(6);
+    // 年份
+    // 年份第一位仅支持1和2
+    const firstYearUnit = number.range(1, 2);
+    // 两位年份规则，仅支持19和20
+    const secondYearUnit = firstYearUnit === 1 ? 9 : 0;
+    // 三位年份规则，仅支持193-199、200、201、202
+    const thirdYearUnit = firstYearUnit === 1 ? number.range(3, 7) : number.range(0, 2);
+    // 四位年份规则,0-9
+    const lastYearUnit = number.range(0, 9);
+    const year = `${firstYearUnit}${secondYearUnit}${thirdYearUnit}${lastYearUnit}`;
+    // 月份
+    // 月份首位规则 0-1
+    const firstMonthUnit = number.range(0, 1);
+    // 月份末位
+    const lastMonthUnit = firstMonthUnit === 0 ? number.range(1, 9) : number.range(0, 2);
+    const month = `${firstMonthUnit}${lastMonthUnit}`;
+    // 天数
+    const days = new Date(Number(year), Number(month), 0).getDate();
+    const day = String(number.range(1, days)).padStart(2, '0');
+    // 随机三位数
+    const lastRandomStr = string.num(3);
+    // 末尾
+    const last = cnNewID(`${firstRandomStr}${year}${month}${day}${lastRandomStr}`);
+    return `${firstRandomStr}${year}${month}${day}${lastRandomStr}${last}`
 }
 
 export const rules = {
