@@ -1,294 +1,636 @@
 # API
 
-## random.boolean( min?, max?, current? )
+## extend
 
-- random.boolean()
-- random.boolean( min, max, default )
+扩展数据生成规则方法、自定义数据生成规则方法
 
-返回一个随机的布尔值。
+### extend.use(name)
 
-### min
+使用自定义数据生成规则方法
 
-可选。
+#### name
 
-指示参数 default出现的概率。。
+必选
 
-### max
-
-可选。
-
-指示参数 current 的相反值 `!default` 出现的概率。
-
-### default
-
-可选。
-
-可选值为布尔值 `true` 或 `false`。如果未传入任何参数，则返回 `true` 和 `false` 的概率各为 50%。
+规则名
 
 ```
-random.boolean()
-// => true
-random.boolean(1, 9, true)
-// => false
+extend.use(Rule1) => 'a';
 
 ```
 
-## random.string(  pool?, min?, max?  )
 
-- random.string()
-- random.string( length )
-- random.string( pool, length )
-- random.string( min, max )
-- random.string( pool, min, max )
 
-返回一个随机字符串。
+### extend.add(name,rule)
 
-### pool
+添加自定义数据生成规则方法
+
+#### name
+
+必选
+
+要添加的规则名
+
+#### rule
+
+必选
+
+要添加的规则方法
+
+```
+extend.add(rule1,()=>{
+retrun 'a'
+})
+```
+
+
+
+### extend.remove(name)
+
+移除自定义数据生成规则方法
+
+#### name
+
+必选
+
+要移除的规则名
+
+
+
+```
+extend.remove(Rule1) 
+```
+
+
+
+## Random
+
+生成随机数据
+
+### Random.boolean()
+
+- Random.boolean()
+- 返回一个随机的布尔值。
+
+
+
+```js
+Random.boolean()
+// =>  true
+
+```
+
+### Random.character(  pool? )
+
+返回一个随机字符。
+
+- Random.character()
+
+- Random.character(pool)：传入自定义字符串池
+
+- Random.character( 'lower') 
+
+- Random.character( 'upper')
+
+- Random.character( 'number')
+
+- Random.character( 'symbol')
+
+  
+
+#### pool
 
 可选。
 
 字符串。表示字符池，将从中选择一个字符返回。
 
-### min
+内置关键词字符串池有 
+
+- lower 小写字母字符串池
+
+- upper 大写字母字符串池
+
+- number 数字字符串池
+
+- symbol 特殊符号字符串池
+
+  
+
+
+
+```js
+Random.character()
+// => 'a'
+Random.character('wsss')
+// =>  's'
+// 内置关键词字符串池
+Random.character( 'lower') 
+// =>  'a'
+Random.character( 'upper')
+// =>  'A'
+Random.character( 'number')
+// =>  '0'
+Random.character( 'symbol') 
+// =>  '!'
+```
+
+
+
+
+
+### Random.string(  pool?, min?, max?  )
+
+返回一个随机字符串。
+
+- Random.string()
+- Random.string( length )
+- Random.string( pool)
+- Random.string( pool, length )
+- Random.string( min, max )
+- Random.string( pool, min, max )
+
+
+
+#### pool
+
+可选。
+
+字符串。表示字符池，将从中选择一个字符返回。
+
+#### min
 
 可选。
 
 随机字符串的最小长度。默认值为 3。
 
-### max
+#### max
 
 可选。
 
-随机字符串的最大长度。默认值为 7。
+随机字符串的最大长度。默认值为 7。-
 
 ```
-random.string()
+Random.string()
 // => "pJjDUe"
-random.string( 5 )
+Random.string( 5 )
 // => "GaadY"
-random.string('wwqwsaasasassa', 5 )
+Random.string( 'qwsqwqwqw' )
+// => "swqq"
+Random.string('wwqwsaasasassa', 5 )
 // => "wqwsa"
-random.string( 7, 10 )
+Random.string( 7, 10 )
 // => "UuGQgSYk"
-random.string( 'aeiou', 1, 3 )
+Random.string( 'aeiou', 1, 3 )
 // => "ea"
 
 ```
 
 
 
-## random.natural( min?, max? )
+### Random.natural( min?, max? )
 
-- random.natural()
-- random.natural( min )
-- random.natural( min, max )
+- Random.natural()
+- Random.natural( min )
+- Random.natural( min, max )
 
 返回一个随机的自然数（大于等于 0 的整数）。
 
-### min
+#### min
 
 可选。
 
 指示随机自然数的最小值。默认值为 0。
 
-### max
+#### max
 
 可选。
 
 指示随机自然数的最大值。默认值为 9007199254740992。
 
 ```
-random.natural()
+Random.natural()
 // => 1002794054057984
-random.natural(10000)
+Random.natural(10000)
 // => 71529071126209
-random.natural(60, 100)
+Random.natural(60, 100)
 // => 77
 ```
 
-## random.integer( min?, max? )
+### Random.integer( min?, max? )
 
-- random.integer()
-- random.integer( min )
-- random.integer( min, max )
+- Random.integer()
+- Random.integer( min )
+- Random.integer( min, max )
 
 返回一个随机的整数。
 
-### min
+#### min
 
 可选。
 
 指示随机整数的最小值。默认值为 -9007199254740992。
 
-### max
+#### max
 
 可选。
 
 指示随机整数的最大值。默认值为 9007199254740992。
 
 ```
-random.integer()
+Random.integer()
 // => -3815311811805184
-random.integer(10000)
+Random.integer(10000)
 // => 4303764511003750
-random.integer(60,100)
+Random.integer(60,100)
 // => 96
 ```
 
-## random.float( min?, max?, dmin?, dmax? )
+### Random.float( min?, max?, dmin?, dmax? )
 
-- random.float()
-- random.float( min )
-- random.float( min, max )
-- random.float( min, max, dmin )
-- random.float( min, max, dmin, dmax )
+- Random.float()
+- Random.float( min )
+- Random.float( min, max )
+- Random.float( min, max, dmin )
+- Random.float( min, max, dmin, dmax )
 
 返回一个随机的浮点数。
 
-### min
+#### min
 
 可选。
 
 整数部分的最小值。默认值为 -9007199254740992。
 
-### max
+#### max
 
 可选。
 
 整数部分的最大值。默认值为 9007199254740992。
 
-### dmin
+#### dmin
 
 可选。
 
 小数部分位数的最小值。默认值为 0。
 
-### dmax
+#### dmax
 
 可选。
 
 小数部分位数的最大值。默认值为 17。
 
 ```
-random.float()
+Random.float()
 // => -1766114241544192.8
-random.float(0)
+Random.float(0)
 // => 556530504040448.25
-random.float(60, 100)
+Random.float(60, 100)
 // => 82.56779679549358
-random.float(60, 100, 3)
+Random.float(60, 100, 3)
 // => 61.718533677927894
-random.float(60, 100, 3, 5)
+Random.float(60, 100, 3, 5)
 // => 70.6849
 ```
 
-## random.date( format? )
+### Random.uuid()
+
+- Random.uuid()
+- 返回一个随机16位的id
+
+
+
+```js
+Random.uuid()
+// =>  85347fb9-59f3-47ce-8d50-31de1077af7b
+
+```
+
+
+
+### Random.idCard()
+
+- Random.idCard()
+- 返回一个随机的身份证
+
+
+
+```js
+Random.idCard()
+// => 350000201104245512
+
+```
+
+### Random.mobile ()
+
+- Random.mobile ()
+- 返回一个随机的手机号
+
+
+
+```js
+Random.mobile ()
+// =>  18344058221
+
+```
+
+
+
+### Random.word( min?, max? )
+
+- Random.word()
+- Random.word( length)
+- Random.word( min, max )
+
+返回一个随机的英文单词。
+
+#### min
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 3。
+
+#### max
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 10
+
+```
+Random.word()
+// => 'assasa'
+Random.word(5)
+// => 'sssqq'
+Random.word(4, 7)
+// => 'sssqsq'
+```
+
+### Random.sentence( min?, max? )
+
+- Random.sentence()
+- Random.sentence( length)
+- Random.sentence( min, max )
+
+返回一个随机的英文句子。
+
+#### min
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 3。
+
+#### max
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 10
+
+```
+Random.sentence()
+// => 'Spbchwknxp iwlevkh wkqdlqphh sgwgsw.'
+Random.sentence(5)
+// => 'Spbchwknxp iwlevkh wsassa wkqdlqphh sgwgsw.'
+Random.sentence(4, 7)
+// => 'Qzkep uodwmpt nlgsdrjwv lbzx mxbwovcy.'
+```
+
+
+
+### Random.paragraph( min?, max? )
+
+- Random.paragraph()
+- Random.paragraph( length)
+- Random.paragraph( min, max )
+
+返回一个随机的英文段落。
+
+#### min
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 3。
+
+#### max
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 10
+
+```
+Random.paragraph()
+// => 'Iwllohxwm qpjprj iwlmkxy blgyxmnvw svgpicxcb ycooe gwfgojy wfkuqxp vswr. Euohhbpyy meorgwxk hxzqsvu siktfrh kicwhcf ijecvepnt lywl enhd. Nwzvj oebjnk jypy qov cjetlfb fwdmfull idpmonbl eylnvjuut rbqfdx. Vmljcsg edmqivjdvb uyhvrdf beihn.'
+Random.paragraph(5)
+// => 'Imnofhlnd kjjp etdr bniy wiuvcixb. Cggqnxyv oqippqfob zlfe nyxuo niaxhdytfh myvcay jmvs mion qbre. Xrksxeewk fykdl dntvxjkkz xkkbocd uxyuil wjkw enugvb qsh qtexodv. Dbcj pyviy bbpg ibfe xskvlqrfo morbtbmmdh sgun. Lbtli mbtz 
+snqclqgoq xdepvdqao uonw cxdn pkjtguh egorsr rscs yotulmtmr.
+'
+Random.paragraph(4, 7)
+// => 'Ygwpetlj bcegey gfhp gohufqhg jrnaw vlkphftoq yjusb wnpu. Qfyuvo xqupxv wywnwnzbo xcpyq wwfgjlv wxo avipdb ovhm. Hsgcjhhkcs mipfcvzl pnfswwsf tsgmdkiltv wgjpdx auwkkaieui thbc iouflzt xwuyfg. Basty ajptuu cimqyc yrm hsexdmevv wxcghgxlc jvxqhucpip. Rpjpmraqk ptymlj twkrql vjhizc uuvjtby petbejpsz bfhkdl lmwwtfpr ebhdqknf. Hhyh ifnhy vqrbcq ewjfwdbp ytene taoxlujn.
+'
+```
+
+### Random.cword( min?, max? )
+
+- Random.cword()
+- Random.cword( length)
+- Random.cword( min, max )
+
+返回一个随机的中文汉字。
+
+#### min
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 3。
+
+#### max
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 10
+
+```
+Random.cword()
+// => '其带组方共义你研她布'
+Random.cword(5)
+// => '用权己最南'
+Random.cword(4, 7)
+// => '非处二红给'
+```
+
+
+
+### Random.csentence( min?, max? )
+
+- Random.csentence()
+- Random.csentence( length)
+- Random.csentence( min, max )
+
+返回一个随机的中文句子。
+
+#### min
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 3。
+
+#### max
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 10
+
+```
+Random.csentence()
+// => '众美天构又场使战们取林上海素总目亲般管天决省给斗般观什组群入即受集着由决代特至上照转最行机历本节何己参但间可铁观石心战集而书他。'
+Random.csentence(5)
+// => '好任界和外置治主教文并每很化强有应参边火全问由说亲华四称教精看育为持直个。'
+Random.csentence(5, 8)
+// => '争次价民出命团前厂几断太人和山那就正严革容没还构点们内来百照济部说身元素无率品习还。'
+```
+
+
+
+### Random.cparagraph( min?, max? )
+
+- Random.cparagraph()
+- Random.cparagraph( length)
+- Random.cparagraph( min, max )
+
+返回一个随机的中文段落。
+
+#### min
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 3。
+
+#### max
+
+可选。
+
+指示生成的单词的位数最小值。默认值为 10
+
+```
+Random.cparagraph()
+// => '或需通易存行世度八形容了今书做比得状信与学小果复持直将组今育运。作为二值从战高决只办由受做计原加队从头四技门及律劳提严个组专列月不存办里写是文权西龙音群传取从火。存历查才完水厂出查理别得史便知其龙自状没人石七影难展题便名世率
+打工火铁劳发阶号使划部十间究信接方四产关养过处即风加市土话热战眼西不。工发而技义称而点技情则集道回广率转号具高王里几务南事难果构物被合步又新里。因光众始运知包器图相广速安公者通。明先约持极向然马利门般保界大联合导金族老火因北
+利花组历多位于话业造往料切程维听包况收物果素论。
+'
+Random.cparagraph(5)
+// => '许响线调取色千改话反铁政斯各强干等很争感人动做几义消。真间动制上己确制和之按种代经照如起八真式它权所二局存则干得温名属说导力历品十数管边路以断花率参精政那且叫。分认安技程红温外志看示圆标三政有复眼头眼十布备精低分南京条选世命
+识系青维或身长一研在米支。选已安不型厂意于局光车一之两划红常划日动类团想先一事光石则亲响般究至员近石效用很时史传总济政此至价命全做干表党。究低会严性法用少压群号议示交大意产持声交和二质应速老省。
+'
+Random.cparagraph(4, 7)
+// => '标队没天京政下金月标史花原族想今清广定四国就进须以至情数准后采。说选参革你发处日必究保量年程已美传变确的单来公利取想了万省的。世统原近什大算及已种界切日门同斯按经则战加带半说记你图支且门必图院八进各叫叫查情产除半金段众起。出
+除周三每存干四机角内它积么号所型较集重报分叫习县京军段程易完养命自眼前。'
+```
+
+
+
+### Random.date( format? )
 
 - date()
 - date(format)
 
 返回一个随机的日期字符串。
 
-### format
+#### format
 
 可选。
 
 指示生成的日期字符串的格式。默认值为 `yyyy-MM-dd`。
 
 ```
-random.date()
+Random.date()
 // => "2002-10-23"
-random.date('yyyy-MM-dd')
+Random.date('yyyy-MM-dd')
 // => "1983-01-29"
-random.date('yy-MM-dd')
+Random.date('yy-MM-dd')
 // => "79-02-14"
-random.date('y-MM-dd')
+Random.date('y-MM-dd')
 // => "81-05-17"
-random.date('y-M-d')
+Random.date('y-M-d')
 // => "84-6-5"
 ```
 
-## random.time( format? )
 
-- random.time()
-- random.time( format )
+
+### Random.time( format? )
+
+- Random.time()
+- Random.time( format )
 
 返回一个随机的时间字符串。
 
-### format
+#### format
 
 可选。
 
-指示生成的时间字符串的格式。默认值为 `HH:mm:ss`。
+指示生成的时间字符串的格式。默认值为 `HH：mm：ss`。
 
 ```
-random.time()
-// => "00:14:47"
-random.time('A HH:mm:ss')
-// => "PM 20:47:37"
-random.time('a HH:mm:ss')
-// => "pm 17:40:00"
-random.time('HH:mm:ss')
-// => "03:57:53"
-random.time('H:m:s')
-// => "3:5:13"
+Random.time()
+// => "00：14：47"
+Random.time('A HH：mm：ss')
+// => "PM 20：47：37"
+Random.time('a HH：mm：ss')
+// => "pm 17：40：00"
+Random.time('HH：mm：ss')
+// => "03：57：53"
+Random.time('H：m：s')
+// => "3：5：13"
 ```
 
-## random.datetime( format? )
+### Random.datetime( format? )
 
-- random.datetime()
-- random.datetime( format )
+- Random.datetime()
+- Random.datetime( format )
 
 返回一个随机的日期和时间字符串。
 
-### format
+#### format
 
 可选。
 
-指示生成的日期和时间字符串的格式。默认值为 `yyyy-MM-dd HH:mm:ss`。
+指示生成的日期和时间字符串的格式。默认值为 `yyyy-MM-dd HH：mm：ss`。
 
 ```
-random.datetime()
-// => "1977-11-17 03:50:15"
-random.datetime('yyyy-MM-dd A HH:mm:ss')
-// => "1976-04-24 AM 03:48:25"
-random.datetime('yy-MM-dd a HH:mm:ss')
-// => "73-01-18 pm 22:12:32"
-random.datetime('y-MM-dd HH:mm:ss')
-// => "79-06-24 04:45:16"
-random.datetime('y-M-d H:m:s')
-// => "02-4-23 2:49:40"
+Random.datetime()
+// => "1977-11-17 03：50：15"
+Random.datetime('yyyy-MM-dd A HH：mm：ss')
+// => "1976-04-24 AM 03：48：25"
+Random.datetime('yy-MM-dd a HH：mm：ss')
+// => "73-01-18 pm 22：12：32"
+Random.datetime('y-MM-dd HH：mm：ss')
+// => "79-06-24 04：45：16"
+Random.datetime('y-M-d H：m：s')
+// => "02-4-23 2：49：40"
 ```
 
-## now( unit?, format? )
+### now(  format? )
 
-- random.now()
+- Random.now()
 
-- random.now( format )
+- Random.now( format )
 
   返回当前的日期和时间字符串。
 
-### format
+#### format
 
 可选。
 
-指示生成的日期和时间字符串的格式。默认值为 `yyyy-MM-dd HH:mm:ss`。可选的占位符参考自 [Ext.Date](http://docs.sencha.com/ext-js/4-1/#!/api/Ext.Date)，请参见 [date(format)](https://github.com/nuysoft/Mock/wiki/Date#date)。
+指示生成的日期和时间字符串的格式。默认值为 `yyyy-MM-dd HH：mm：ss`。
 
 ```
-random.now()
-// => "2014-04-29 20:08:38 "
-random.now('day', 'yyyy-MM-dd HH:mm:ss SS')
-// => "2014-04-29 00:00:00 000"
-random.now('day')
-// => "2014-04-29 00:00:00 "
-random.now('yyyy-MM-dd HH:mm:ss SS')
-// => "2014-04-29 20:08:38 157"
+Random.now()
+// => "2014-04-29 20：08：38 "
+Random.now('yyyy-MM-dd HH：mm：ss SS')
+// => "2014-04-29 20：08：38 157"
 
 ```
 
-## generate
+## mock
 
-generate(template)
+mock(template)
 
 支持根据数据模板生成数据
 
@@ -296,13 +638,13 @@ generate(template)
 
 #### 属性值是字符串 **String**
 
-##### 'name|min-max': string
+##### 'name|min-max'： string
 
 通过重复 `string` 生成一个字符串，重复次数大于等于 `min`，小于等于 `max`。
 
 ```
 Mock.mock({
-  "string|1-10": "★"
+  "string|1-10"： "★"
 })
 ```
 
@@ -310,13 +652,13 @@ Result
 
 ```
 {
-  "string": "★★★"
+  "string"： "★★★"
 }
 ```
 
 
 
-##### 'name|count': string
+##### 'name|count'： string
 
 通过重复 `string` 生成一个字符串，重复次数等于 `count`。
 
@@ -324,7 +666,7 @@ Result
 
 ```
 Mock.mock({
-  "string|3": "★★★"
+  "string|3"： "★★★"
 })
 ```
 
@@ -332,47 +674,45 @@ Result
 
 ```
 {
-  "string": "★★★★★★★★★"
+  "string"： "★★★★★★★★★"
 }
 ```
 
 
+
+##### 'name|min-max'： string
+
+通过重复 `string` 生成一个字符串，重复次数在min-max之间。
+
+##### Data Template
+
+```
+Mock.mock({
+  "string|1-5"： "★"
+})
+```
+
+Result
+
+```
+{
+  "string"： "★★★"
+}
+```
 
 
 
 #### 属性值是数字 **Number**
 
-##### 'name|+1': number
-
-属性值自动加 1，初始值为 `number`。
-
-Data Template
-
-```
-Mock.generate({
-  "number|+1": 202
-})
-```
-
-Result
-
-```
-{
-  "number": 203
-}
-```
-
-
-
-##### 'name|min-max': number
+##### 'name|min-max'： number
 
 生成一个大于等于 `min`、小于等于 `max` 的整数，属性值 `number` 只是用来确定类型
 
 Data Template
 
 ```
-Mock.generate({
-  "number|1-100": 100
+Mock.mock({
+  "number|1-100"： 100
 })
 ```
 
@@ -380,24 +720,24 @@ Result
 
 ```
 {
-  "number": 49
+  "number"： 49
 }
 ```
 
 
 
-##### 'name|min-max.dmin-dmax': number
+##### 'name|min-max.dmin-dmax'： number
 
 生成一个浮点数，整数部分大于等于 `min`、小于等于 `max`，小数部分保留 `dmin` 到 `dmax` 位。
 
 Data Template
 
 ```
-Mock.generate({
-    'number1|1-100.1-10': 1,
-    'number2|123.1-10': 1,
-    'number3|123.3': 1,
-    'number4|123.10': 1.123
+Mock.mock({
+    'number1|1-100.1-10'： 1,
+    'number2|123.1-10'： 1,
+    'number3|123.3'： 1,
+    'number4|123.10'： 1.123
 })
 
 
@@ -407,10 +747,10 @@ Result
 
 ```
 {
-    "number1": 12.92,
-    "number2": 123.51,
-    "number3": 123.777,
-    "number4": 123.1231091814
+    "number1"： 12.92,
+    "number2"： 123.51,
+    "number3"： 123.777,
+    "number4"： 123.1231091814
 }
 ```
 
@@ -422,15 +762,15 @@ Result
 
 
 
-##### 'name|1': boolean
+##### 'name'： boolean
 
-随机生成一个布尔值，值为 true 的概率是 1/2，值为 false 的概率同样是 1/2。
+随机生成一个布尔值，
 
 Data Template
 
 ```
-Mock.generate({
-  "boolean|1": true
+Mock.mock({
+  "boolean"： true
 })
 ```
 
@@ -438,37 +778,17 @@ Result
 
 ```
 {
-  "boolean": true
+  "boolean"： true
 }
 ```
 
 
-
-##### 'name|min-max': boolean
-
-随机生成一个布尔值，值为 `value` 的概率是 `min / (min + max)`，值为 `!value` 的概率是 `max / (min + max)`。
-
-Data Template
-
-```
-Mock.generate({
-  "boolean|1-2": true
-})
-```
-
-Result
-
-```
-{
-  "boolean": true
-}
-```
 
 
 
 #### 属性值是对象 **Object**
 
-##### 'name|count': object
+##### 'name|count'： object
 
 从属性值 `object` 中随机选取 `count` 个属性。
 
@@ -476,11 +796,11 @@ Data Template
 
 ```
 Mock.mock({
-  "object|2": {
-    "310000": "上海市",
-    "320000": "江苏省",
-    "330000": "浙江省",
-    "340000": "安徽省"
+  "object|2"： {
+    "310000"： "上海市",
+    "320000"： "江苏省",
+    "330000"： "浙江省",
+    "340000"： "安徽省"
   }
 })
 ```
@@ -489,28 +809,28 @@ Result
 
 ```
 {
-  "object": {
-    "330000": "浙江省",
-    "340000": "安徽省"
+  "object"： {
+    "330000"： "浙江省",
+    "340000"： "安徽省"
   }
 }
 ```
 
 
 
-##### 'name|min-max': object
+##### 'name|min-max'： object
 
 从属性值 `object` 中随机选取 `min` 到 `max` 个属性。
 
 Data Template
 
 ```
-Mock.generate({
-  "object|2-4": {
-    "110000": "北京市",
-    "120000": "天津市",
-    "130000": "河北省",
-    "140000": "山西省"
+Mock.mock({
+  "object|2-4"： {
+    "110000"： "北京市",
+    "120000"： "天津市",
+    "130000"： "河北省",
+    "140000"： "山西省"
   }
 })
 ```
@@ -519,10 +839,10 @@ Result
 
 ```
 {
-  "object": {
-    "110000": "北京市",
-    "130000": "河北省",
-    "140000": "山西省"
+  "object"： {
+    "110000"： "北京市",
+    "130000"： "河北省",
+    "140000"： "山西省"
   }
 }
 ```
@@ -531,15 +851,15 @@ Result
 
 #### 属性值是数组 **Array**
 
-##### 'name|1': array
+##### 'name|1'： array
 
 从属性值 `array` 中随机选取 1 个元素，作为最终值。
 
 Data Template
 
 ```
-Mock.generate({
-  "array|1": [
+Mock.mock({
+  "array|1"： [
     "AMD",
     "CMD",
     "UMD"
@@ -551,21 +871,21 @@ Result
 
 ```
 {
-  "array": "CMD"
+  "array"： "CMD"
 }
 ```
 
 
 
-##### 'name|+1': array
+##### 'name|+1'： array
 
 从属性值 `array` 中顺序选取 1 个元素，作为最终值。
 
 Data Template
 
 ```
-Mock.generate({
-  "array|+1": [
+Mock.mock({
+  "array|+1"： [
     "AMD",
     "CMD",
     "UMD"
@@ -577,17 +897,17 @@ Result
 
 ```
 {
-  "array": "AMD"
+  "array"： "AMD"
 }
 ```
 
 Data Template
 
 ```
-Mock.generate({
-  "array|1-10": [
+Mock.mock({
+  "array|1-10"： [
     {
-      "name|+1": [
+      "name|+1"： [
         "Hello",
         "Mock.js",
         "!"
@@ -601,24 +921,24 @@ Result
 
 ```
 {
-  "array": [
+  "array"： [
     {
-      "name": "Hello"
+      "name"： "Hello"
     },
     {
-      "name": "Mock.js"
+      "name"： "Mock.js"
     },
     {
-      "name": "!"
+      "name"： "!"
     },
     {
-      "name": "Hello"
+      "name"： "Hello"
     },
     {
-      "name": "Mock.js"
+      "name"： "Mock.js"
     },
     {
-      "name": "!"
+      "name"： "!"
     }
   ]
 }
@@ -626,15 +946,15 @@ Result
 
 
 
-##### 'name|min-max': array
+##### 'name|min-max'： array
 
 通过重复属性值 `array` 生成一个新数组，重复次数大于等于 `min`，小于等于 `max`。
 
 Data Template
 
 ```
-Mock.generate({
-  "array|1-10": [
+Mock.mock({
+  "array|1-10"： [
     "Mock.js"
   ]
 })
@@ -644,76 +964,10 @@ Result
 
 ```
 {
-  "array": [
+  "array"： [
     "Mock.js",
     "Mock.js",
     "Mock.js",
-    "Mock.js",
-    "Mock.js",
-    "Mock.js"
-  ]
-}
-```
-
-
-
-Data Template
-
-```
-Mock.generate({
-  "array|1-10": [
-    "Hello",
-    "Mock.js",
-    "!"
-  ]
-})
-```
-
-Result
-
-```
-{
-  "array": [
-    "Hello",
-    "Mock.js",
-    "!",
-    "Hello",
-    "Mock.js",
-    "!",
-    "Hello",
-    "Mock.js",
-    "!",
-    "Hello",
-    "Mock.js",
-    "!",
-    "Hello",
-    "Mock.js",
-    "!"
-  ]
-}
-```
-
-
-
-##### 'name|count': array
-
-通过重复属性值 `array` 生成一个新数组，重复次数为 `count`。
-
-Data Template
-
-```
-Mock.generate({
-  "array|3": [
-    "Mock.js"
-  ]
-})
-```
-
-Result
-
-```
-{
-  "array": [
     "Mock.js",
     "Mock.js",
     "Mock.js"
@@ -727,7 +981,7 @@ Data Template
 
 ```
 Mock.mock({
-  "array|3": [
+  "array|1-10"： [
     "Hello",
     "Mock.js",
     "!"
@@ -739,7 +993,13 @@ Result
 
 ```
 {
-  "array": [
+  "array"： [
+    "Hello",
+    "Mock.js",
+    "!",
+    "Hello",
+    "Mock.js",
+    "!",
     "Hello",
     "Mock.js",
     "!",
@@ -755,20 +1015,17 @@ Result
 
 
 
-####  属性值是函数 **Function**
+##### 'name|count'： array
 
-##### 'name': function
-
-执行函数 `function`，取其返回值作为最终的属性值，函数的上下文为属性 `'name'` 所在的对象。
+通过重复属性值 `array` 生成一个新数组，重复次数为 `count`。
 
 Data Template
 
 ```
-Mock.generate({
-  'foo': 'Syntax Demo',
-  'name': function() {
-    return this.foo
-  }
+Mock.mock({
+  "array|3"： [
+    "Mock.js"
+  ]
 })
 ```
 
@@ -776,48 +1033,11 @@ Result
 
 ```
 {
-  "foo": "Syntax Demo",
-  "name": "Syntax Demo"
-}
-```
-
-
-
-####  属性值是正则表达式 **RegExp**
-
-##### 'name': regexp
-
-根据正则表达式 `regexp` 反向生成可以匹配它的字符串。用于生成自定义格式的字符串。
-
-Data Template
-
-```
-Mock.generate({
-  'regexp': /[a-z][A-Z][0-9]/
-})
-```
-
-Result
-
-```
-{
-  "regexp": "qH8"
-}
-```
-
-Data Template
-
-```
-Mock.generate({
-  'regexp': /\w\W\s\S\d\D/
-})
-```
-
-Result
-
-```
-{
-  "regexp": "y`\nd1P"
+  "array"： [
+    "Mock.js",
+    "Mock.js",
+    "Mock.js"
+  ]
 }
 ```
 
@@ -826,8 +1046,12 @@ Result
 Data Template
 
 ```
-Mock.generate({
-  'regexp': /\d{5,10}/
+Mock.mock({
+  "array|3"： [
+    "Hello",
+    "Mock.js",
+    "!"
+  ]
 })
 ```
 
@@ -835,45 +1059,23 @@ Result
 
 ```
 {
-  "regexp": "57172670"
+  "array"： [
+    "Hello",
+    "Mock.js",
+    "!",
+    "Hello",
+    "Mock.js",
+    "!",
+    "Hello",
+    "Mock.js",
+    "!"
+  ]
 }
 ```
 
 
 
-Data Template
 
-```
-Mock.generate({
-  'regexp|3': /\d{5,10}\-/
-})
-```
-
-Result
-
-```
-{
-  "regexp": "8171154-1254364-47339672-4513135-"
-}
-```
-
-
-
-Data Template
-
-```
-Mock.generate({
-  'regexp|1-5': /\d{5,10}\-/
-})
-```
-
-Result
-
-```
-{
-  "regexp": "65086786-246817263-18453602-"
-}
-```
 
 ## 数据占位符定义规范
 
@@ -890,20 +1092,20 @@ Result
 
 1. 用 `@` 来标识其后的字符串是 *占位符*。
 
-2. *占位符* 引用的是 `Mock.random` 中的方法。
+2. *占位符* 引用的是 `Mock.Random` 中的方法。
 
    
 
 ```
-Mock.generate('@boolean(1, 9, true)') //false
-Mock.generate('@natural(60, 100)') //81
-Mock.generate('@integer(60, 100)') //82
-Mock.generate('@float(60, 100, 3)') //83.325
-Mock.generate('@string("aeiou", 5)') //"iuoou"
-Mock.generate('@date("yyyy-MM-dd")') //"2008-05-11"
-Mock.generate('@time("H:m:s")') // 14:58:3"
-Mock.generate('@datetime()') // "2021-03-21 14:05:27"
-Mock.generate('@now()') // "2023-06-03 16:16:18"
+Mock.mock('@boolean(1, 9, true)') //false
+Mock.mock('@natural(60, 100)') //81
+Mock.mock('@integer(60, 100)') //82
+Mock.mock('@float(60, 100, 3)') //83.325
+Mock.mock('@string("aeiou", 5)') //"iuoou"
+Mock.mock('@date("yyyy-MM-dd")') //"2008-05-11"
+Mock.mock('@time("H：m：s")') // 14：58：3"
+Mock.mock('@datetime()') // "2021-03-21 14：05：27"
+Mock.mock('@now()') // "2023-06-03 16：16：18"
 ```
 
 # 设计约束（DFX）

@@ -1,22 +1,18 @@
 import generator, { Random } from './generator';
-
+import { MockExtend } from './extend';
 export { Random };
 
-export function mock (any: any) {
-  const opts = { rootTpl: any, callbacks: [] };
-  const root = generator(any, '', opts);
-
-  // 处理函数回调
-  opts.callbacks.forEach((opt: any) => {
-    opt.parent[opt.key] = opt.fn.call(opt.parent, root);
-  });
-
-  return root;
+export function mock(tem: any) {
+  const mockData = generator(tem, '');
+  return mockData;
 }
 
+const extend = new MockExtend();
+
+export { extend };
 // 默认导出
 export default {
   mock,
-
   Random,
+  extend,
 };
