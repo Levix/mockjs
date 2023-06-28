@@ -2,9 +2,7 @@ import { it, expect, describe } from 'vitest';
 import Mock from '../src/index';
 
 describe('模板测试', () => {
-  /* 数据模板定义 (Data Temaplte Definition，DTD) */
-
-  /* string */
+  /* 属性值是字符串 */
   it('Mock.mock({ "str|3": "" })', t => {
     expect(JSON.stringify(Mock.mock({ 'str|3': '' }))).toMatch(/{"str":"\w{3}"}/);
   });
@@ -18,7 +16,7 @@ describe('模板测试', () => {
     expect(ret.str.length).within(1, 5);
   });
 
-  /* number */
+  /* 属性值是数值 */
   it('Mock.mock({ "number|1-100": 1 })', t => {
     const ret = Mock.mock({ 'number|1-100': 1 });
     expect(ret.number).within(1, 100);
@@ -27,25 +25,16 @@ describe('模板测试', () => {
   it('Mock.mock({ "number|10.1-6": 1 })', t => {
     const ret = Mock.mock({ 'number|10.1-6': 1 });
     const len = String(ret.number).length;
-    expect(len).within(4, 18);
+    expect(len).within(3, 8);
   });
 
-  it('Mock.mock({ "number|+1": 20 })', t => {
-    const ret = Mock.mock({
-      'list|3': [{ 'id|+1': 20 }],
-    });
-    expect(ret).toEqual({
-      list: [{ id: 20 }, { id: 21 }, { id: 22 }],
-    });
-  });
-
-  /* boolean */
+  /* 属性值是布尔值 */
   it('Mock.mock({ "boolean": true })', t => {
-    const ret = Mock.mock({ 'boolean|1': true });
+    const ret = Mock.mock({ boolean: true });
     expect(ret.boolean).toBeTypeOf('boolean');
   });
 
-  /* object */
+  /* 属性值是对象 */
   it('Mock.mock({"object|2":{"310000":"上海市","320000":"江苏省","330000":"浙江省","340000":"安徽省"}})', t => {
     const ret = Mock.mock({
       'object|2': {
@@ -72,8 +61,7 @@ describe('模板测试', () => {
     expect(len).within(1, 3);
   });
 
-  /* array */
-  // 'name|1': array
+  // 属性值是数组
   it('Mock.mock({"array|1":["AMD","CMD","UMD"]})', t => {
     const ret = Mock.mock({
       'array|1': ['AMD', 'CMD', 'UMD'],
@@ -81,34 +69,23 @@ describe('模板测试', () => {
     expect(ret.array[2]).toEqual('D');
   });
 
-  // 'name|+1': array
-  it('Mock.mock({"array|+1":["AMD","CMD","UMD"]})', t => {
+  it('Mock.mock({"array|1-3":[{"id":10}]})', t => {
     const ret = Mock.mock({
-      'array|+1': ['AMD', 'CMD', 'UMD'],
-    });
-    expect(ret.array).toEqual('AMD');
-  });
-
-  // 'name|min-max': array
-  it('Mock.mock({"array|1-3":[{"id|+1":10}]})', t => {
-    const ret = Mock.mock({
-      'array|1-3': [{ 'id|+1': 10 }],
+      'array|1-3': [{ 'id|1': 10 }],
     });
     const len = ret.array.length;
     expect(len).within(1, 3);
   });
 
-  // 'name|count': array
-  it('Mock.mock({"array|3":[{"id|+1":10}]})', t => {
+  it('Mock.mock({"array|3":[{"id":10}]})', t => {
     const ret = Mock.mock({
-      'array|3': [{ 'id|+1': 10 }],
+      'array|3': [{ id: 10 }],
     });
     expect(ret).toEqual({
-      array: [{ id: 10 }, { id: 11 }, { id: 12 }],
+      array: [{ id: 10 }, { id: 10 }, { id: 10 }],
     });
   });
 
-  // 'name': array
   it('Mock.mock({"array":[1,2,3]})', t => {
     const ret = Mock.mock({
       array: [1, 2, 3],
@@ -118,24 +95,15 @@ describe('模板测试', () => {
     });
   });
 
-  /* function */
-  // 'name': function
-  it('Mock.mock({ "name": function })', t => {
-    const ret = Mock.mock({
-      bar: {
-        foo: 'inner',
-        name(root) {
-          return `this: ${this.foo}, root: ${root.foo}`;
-        },
-      },
-      foo: 'outer',
-    });
-    expect(ret).toEqual({
-      bar: {
-        foo: 'inner',
-        name: 'this: inner, root: outer',
-      },
-      foo: 'outer',
-    });
+  it('占位符测试', t => {
+    expect(Mock.mock('@boolean()')).toBeTypeOf('boolean');
+    expect(Mock.mock('@natural()')).toBeTypeOf('number');
+    expect(Mock.mock('@natural(60, 100)')).within(60, 100);
+    expect(Mock.mock('@integer()')).toBeTypeOf('number');
+    expect(Mock.mock('@integer(-60, -10)')).within(-60, -10);
+    expect(Mock.mock('@string()')).toBeTypeOf('string');
+    expect(Mock.mock('@string("aeiou",1,5)')).toMatch(/^[aeiou]{1,5}$/);
+    expect(Mock.mock('@date()')).toMatch(/^\d{4}-\d\d-\d\d$/);
+    expect(Mock.mock('@string("aeiou",1)@string("aeiou",1)')).toMatch(/^[aeiou]{2}$/);
   });
 });

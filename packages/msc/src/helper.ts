@@ -1,4 +1,4 @@
-import { integer } from './random/basic';
+import { integer } from './random/number';
 
 /**
  * 把字符串的第一个字母转换为大写
@@ -72,13 +72,38 @@ export const pick = function (arr?: any[], min?: number, max?: number) {
 /**
  * 获取字符串正则匹配规则
  */
-export const getStrReg = function (type: string, range: string = '', matchType?: string) {
+export const getReg = function (type: string, range: string = '{3,7}', matchType?: string) {
   const STR_REGS = {
     lower: '[a-z]',
     upper: '[A-Z]',
     number: '\\d',
     symbol: '\\W',
-    alpha: '[a-z]',
+    all: '.',
   };
-  return matchType ? new RegExp(`^${STR_REGS[type]}${range}$`, matchType) : new RegExp(`^${STR_REGS[type]}${range}$`);
+
+  const reg = STR_REGS[type] || type;
+  return matchType ? new RegExp(`^${reg}${range}$`, matchType) : new RegExp(`^${reg}${range}$`);
+};
+
+export const toString = Object.prototype.toString;
+
+export const hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/* 获取数据类型 */
+export const type = function (any: any) {
+  return toString.call(any).slice(8, -1).toLowerCase();
+};
+
+/* 匹配键名 */
+export const match = function match(key: string, reg: any) {
+  if (type(key) !== 'string') {
+    return null;
+  }
+  return key.match(reg);
+};
+
+export const log = {
+  warn: console.warn,
+  error: console.error,
+  info: console.log,
 };
